@@ -3,4 +3,4 @@ Play the keyboard on your keyboard
 
 Confused? Me too...
 
-musicbox.py written by Neal Terrell
+musicbox.py written (mostly) by Neal Terrell
