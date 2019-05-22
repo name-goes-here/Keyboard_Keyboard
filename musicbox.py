@@ -25,13 +25,15 @@ class MusicBox:
         if self.__enabled:
             self.__player.close()
 
-    def play_note(self, note, duration):
-        """Plays a single note for a given duration. The note is in integer notation."""
-        print("<MusicBox: play_note({0}, {1})>".format(note, duration))
+    def play_note(self, note):
+        """Plays a single note. The note is in integer notation."""
         if self.__enabled:
             self.__player.set_instrument(self.__instrument, 0)
             self.__player.note_on(note, 127, 0)
-            time.sleep(duration / 1000)
+
+    def stop_note(self, note):
+        """Stops a single note. The note is in integer notation."""
+        if self.__enabled:
             self.__player.note_off(note, 127, 0)
 
     def pause(self, duration):
