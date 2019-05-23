@@ -16,16 +16,33 @@ def main():
     #map_notes()
     #print(note)
     running = True
+    sustain = False  # To sustain notes
+    selective_sustain = False  # To sustain a select group of notes
+    sustained_notes = []
     while running:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    sustain = True
+                if event.key == pygame.K_LCTRL:
+                    selective_sustain = True
                 if event.key in note:
                     m.play_note(note[event.key])
+                    if sustain:
+                        sustained_notes.append(note[event.key])
                 elif event.key == pygame.K_ESCAPE:
                     running = False
             if event.type == pygame.KEYUP:
-                if event.key in note:
-                    m.stop_note(note[event.key])  # Remove to get infinite sustain?
+                if not selective_sustain and not sustain:
+                    if event.key in note:
+                        m.stop_note(note[event.key])
+                elif event.key == pygame.K_LCTRL:
+                    selective_sustain = False
+                elif event.key == pygame.K_SPACE:
+                    sustain = False
+                    for i in sustained_notes:
+                        m.stop_note(sustained_notes.pop())
+
 
 
 def set_frequency(amount):
