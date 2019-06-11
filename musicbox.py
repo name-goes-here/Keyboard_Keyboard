@@ -15,7 +15,7 @@ class MusicBox:
             id = 0
             
         if id >= 0:
-            self.__player = pygame.midi.Output(id, 1)
+            self.__player = pygame.midi.Output(id, 2)
             self.__instrument = instrument
             self.__enabled = True
         else:
@@ -58,8 +58,7 @@ class MusicBox:
 def demo():
     # Example of how to use the MusicBox
     m = MusicBox()
-    m.play_note(60, 500)
-    m.play_note(63, 500)
-    m.play_scale([60, 63, 67], 500)
+    #m.play_note(60, 500)
+    #m.play_note(63, 500)
+    #m.play_scale([60, 63, 67], 500)
     m.play_chord([60, 63, 67], 1000)
-
