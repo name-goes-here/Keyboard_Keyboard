@@ -36,6 +36,9 @@ class MusicBox:
         if self.__enabled:
             self.__player.note_off(note, 127, 0)
 
+    def set_instrument(self, instrument):
+        self.__instrument = instrument
+
     def pause(self, duration):
         time.sleep(duration / 1000)
 
