@@ -21,6 +21,7 @@ def main():
     running = True
     sustain = False  # To sustain notes
     sustained_notes = []
+    global instrument
     while running:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:           
@@ -31,9 +32,13 @@ def main():
                     if sustain:
                         sustained_notes.append(note[event.key])
                 if event.key == pygame.K_UP:
-                    m.set_instrument(++instrument)
+                    instrument += 1
+                    m.set_instrument(instrument)
+                    print(instrument)
                 if event.key == pygame.K_DOWN:
-                    m.set_instrument(--instrument)
+                    instrument -= 1
+                    m.set_instrument(instrument)
+                    print(instrument)
                 elif event.key == pygame.K_ESCAPE:
                     running = False
             if event.type == pygame.KEYUP:
@@ -69,9 +74,6 @@ def map_notes():
         note[i] = lowest_note + j
         j += 1
 
-
-def change_instrument():
-    #  Possible implementation: When an assigned key is pressed (insert, del, etc...), user can type in a specific number to change sound
 
 
 main()
