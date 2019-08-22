@@ -24,21 +24,45 @@ def main():
     global instrument
     while running:
         for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:           
+            if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     sustain = True
                 if event.key in note:
-                    m.play_note(note[event.key])     
+                    m.play_note(note[event.key])
                     if sustain:
                         sustained_notes.append(note[event.key])
                 if event.key == pygame.K_UP:
-                    instrument += 1
-                    m.set_instrument(instrument)
-                    print(instrument)
+                    if instrument < 127:
+                        instrument += 1
+                        m.set_instrument(instrument)
                 if event.key == pygame.K_DOWN:
-                    instrument -= 1
-                    m.set_instrument(instrument)
-                    print(instrument)
+                    if instrument > 0:
+                        instrument -= 1
+                        m.set_instrument(instrument)
+                if event.key == pygame.K_F1:
+                    set_sound(0)  # Piano
+                if event.key == pygame.K_F2:
+                    set_sound(4)  # Electric Piano
+                if event.key == pygame.K_F3:
+                    set_sound(16)  # Electric Organ
+                if event.key == pygame.K_F4:
+                    set_sound(19)  # Pipe Organ
+                if event.key == pygame.K_F5:
+                    set_sound(48)  # Strings
+                if event.key == pygame.K_F6:
+                    set_sound(52)  # Choir
+                if event.key == pygame.K_F7:
+                    set_sound(14)  # Bells
+                if event.key == pygame.K_F8:
+                    set_sound(81)  # Synth
+                if event.key == pygame.K_F9:
+                    set_sound(55)  # Impact/Chord hit
+                if event.key == pygame.K_F10:
+                    set_sound(86)  # Fifth
+                if event.key == pygame.K_F11:
+                    set_sound(124)  # Telephone
+                if event.key == pygame.K_F12:
+                    set_sound(125)  # Helicopter
                 elif event.key == pygame.K_ESCAPE:
                     running = False
             if event.type == pygame.KEYUP:
@@ -51,6 +75,10 @@ def main():
                         m.stop_note(sustained_notes.pop())
 
 
+def set_sound(num):
+    global instrument
+    instrument = num
+    m.set_instrument(instrument)
 
 def set_frequency(amount):
     global frequency
